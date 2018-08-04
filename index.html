@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+
+	<title></title>
+	<style type="text/css">
+		*{
+			margin:0px;
+			padding: 0px;
+		}
+		.view{
+			width: 400px;
+			height: 300px;
+			
+			margin:20px auto;
+			overflow: hidden;
+		}
+		.wrap li{
+			width: 400px;
+			height: 300px;
+			float: left;
+		}
+		.wrap li img{
+			width: 400px;
+			height: 300px;
+		}
+		.wrap{
+			
+		}
+		.bili{
+			font-size: 30px;
+			text-align: center;
+		}
+		.bili input{
+			font-size: 30px;
+			width: 80%;
+			margin:10px auto;
+			border:none;
+			background: rgba(0,0,0,0.1);
+		}
+		
+		.but{
+			text-align: center;
+		}
+		button{
+			
+			height: 35px;
+			line-height: 35px;
+			font-size: 30px;
+			background-color:pink;
+			box-shadow: 3px 0px 8px;
+			outline: none;
+		}
+		.speech{
+			color: red;
+			font-size: 25px;
+			margin-top: 20px;
+			animation: tang 3s linear infinite;
+
+		}
+		@keyframes tang{
+			0%{
+				color: red;
+				margin-left: 100%;
+
+			}
+			25%{
+				color: orange;
+				margin-left: 70%;
+			}
+			50%{
+				color: pink;
+				margin-left: 40%;
+			}
+			75%{
+				color: blue;
+				margin-left: 10%;
+			}
+			100%{
+				
+				color: yellow;
+				margin-left: -10%;
+
+			}
+		}
+		.wrapper{
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+			z-index: 999;
+			position: absolute;
+			top: -100%;
+			animation: drop 5s linear infinite;
+			text-align: center;
+			background: url('images/bg.png');
+			background-size: 100% 100%;
+			display: none;
+		}
+		@keyframes drop{
+			0%{
+				color: orange;
+				top: -100%;
+
+			}
+			25%{
+				color: yellow;
+				top: -50%;
+			}
+			50%{
+				color: green;
+				top: : 0%;
+			}
+			75%{
+				color: blue;
+				top: 50%;
+			}
+			100%{
+				
+				color: purple;
+				top: 100%;
+
+			}
+		}
+		.txt{
+			width: 50px;
+			word-wrap: break-word;
+			font-size: 50px;
+			display: inline-block;
+			margin : 0px 10px;
+			overflow: hidden;
+			margin-top: 200px;
+			
+		}
+	</style>
+</head>
+<body>
+	<div class="view">
+		<ul class="wrap" id="box" style="margin-left: 0px" onclick="drop()">
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+			<li><img src="images/6.jpg" alt=""></li>
+			<li><img src="images/7.jpg" alt=""></li>
+		</ul>
+	</div>
+
+	<div class="bili">
+		<div>猪宝如发言框：</div>
+		<input type="text" id="txt" onblur="change()">
+	</div>
+    <div class="but"><button onclick="cle()">清除弹窗内容</button></div>    
+	<div id="show" class="speech">
+	</div>
+<div class="wrapper" id="gg">
+	<div class="txt"></div>
+	
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	var input = document.getElementById('txt');
+	var left = 0;
+	var show = document.getElementById('show');
+	var gg =document.getElementById('gg');
+	function slide(){
+		left = left - 400;
+		if(left==-2800){
+			left = 0 ;
+		}
+		box.style = "margin-left:"+left+'px';
+	}
+	var timer = setInterval(slide,2000);
+	function change(){
+		if (input.value!='') {
+		var element = document.createElement("div");
+		element.style = " overflow:hidden;white-space: nowrap";
+
+		var textNode =document.createTextNode(input.value);
+		element.appendChild(textNode);
+		input.value='';
+		show.appendChild(element);
+		}
+	}
+	function cle(){
+
+		while(show.firstChild){//也可以调用hasChildNodes
+			show.removeChild(show.firstChild);
+		}
+
+		
+	}
+	function drop(){
+		if(gg.style.display == 'none'){
+			gg.style.display = 'block';
+		}
+		else{
+			gg.style.display = 'none';
+		}
+	}
+</script>
